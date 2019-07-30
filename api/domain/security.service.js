@@ -100,9 +100,12 @@ module.exports = ({ userLimit = 10 }) => {
 		const newUserInfo = { username, token, socket };
 		currentUsers.push(newUserInfo);
 
+		const signedInUsers = getUsers();
+
 		return {
 			username,
 			token,
+			numSignedIn: signedInUsers.length,
 			status: 'loggedin'
 		};
 	};
