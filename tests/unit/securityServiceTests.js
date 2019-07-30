@@ -54,4 +54,10 @@ describe('Security Service test suite', function () {
 		securityService.validateToken('username', newToken);
 		securityService.signOut('socket');
 	});
+
+	it('should be able to validate token in case insensitive way', function () {
+		const { token } = securityService.signIn('username', 'socket');
+		securityService.validateToken('Username', token);
+		securityService.signOut('socket');
+	});
 });

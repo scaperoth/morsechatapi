@@ -22,6 +22,7 @@ module.exports = ({ userLimit = 10 }) => {
 			throw new Error('No token given');
 		}
 
+		username = username.toLowerCase();
 		const user = currentUsers.find(u => u.username === username);
 		if (!user) {
 			throw new Error('User does not exist');
