@@ -2,21 +2,24 @@
 
 module.exports = ({ socket, io, morseService, securityService }) => {
 
-	socket.on('CONNECT', (data) => {
+	socket.on('CONNECT', (data, cb) => {
 		try {
-			securityService.signIn(data.username, socket);
-			io.emit('USER_CONNECTED', data);
+			const response = securityService.signIn(data.username, socket);
+			io.emit('USER_CONNECTED', {username: data.username});
+			cb(response);
 		} catch (err) {
-			socket.emit("disconnect", { error: true });
+			cb({ error: err.message });
+			socket.disconnect();
 		}
 	});
 
-	socket.on('disconnect', ({ error = false }) => {
-		if (error) {
-			return;
+	socket.on('disconnect', () => {
+		try {
+			const response = securityService.signOut(socket);
+			io.emit('USER_DISCONNECTED', response);
+		} catch (err) {
+			console.log(err);
 		}
-		const response = securityService.signOut(socket);
-		io.emit('USER_DISCONNECTED', response);
 	});
 
 	socket.on('SEND_MESSAGE', (data) => {
