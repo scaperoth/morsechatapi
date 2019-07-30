@@ -10,7 +10,7 @@ module.exports = ({ app, morseService }) => {
 				}
 				const result = morseService.convertToStringFromMorse(message);
 
-				response.json(result);
+				response.json({message: result});
 
 			} catch (err) {
 				response
@@ -31,7 +31,7 @@ module.exports = ({ app, morseService }) => {
 				}
 				const result = morseService.convertToMorseFromString(message);
 
-				response.json(result);
+				response.json({message: result});
 
 			} catch (err) {
 				response
