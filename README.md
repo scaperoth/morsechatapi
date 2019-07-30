@@ -67,5 +67,5 @@ when socket `disconnect` is called by socket.io, this message is emitted to the 
 ## TODO
 - ~~write unit tests for services~~
 - ~~write integration tests for socket functions and returns~~
-- handle decryption of morse code through route rather than through sockets
+- ~~handle decryption of morse code through route rather than through sockets~~
 - add Cluster so all cores are being used for chat
