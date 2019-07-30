@@ -1,13 +1,14 @@
-// api/domain/utilities/arrayUtilities.js
+// api/utilities/arrayUtilities.js
 
 /**
- * removes an item from an array and returning
- * copied array
- * @param {[type]} arr array to remove item from
- * @param {[type]} i   item to remove
+ * removes an item from an array based on given key and returns
+ * copied array with item removed
+ * @param {Array} arr array to remove item from
+ * @param {T} i   item to remove of generic type in array
+ * @param {String} key   key to compare in array items
  */
-const RemoveItemFromArray = (arr, i) => {
-	const idx = arr.findIndex(c => c === i);
+const RemoveItemFromArrayByKey = (arr, i, key) => {
+	const idx = arr.findIndex(c => c[key] === i[key]);
 	if (idx > -1) {
 		return [
 			...arr.slice(0, idx),
@@ -21,5 +22,5 @@ const RemoveItemFromArray = (arr, i) => {
 };
 
 module.exports = {
-	RemoveItemFromArray
-}
+	RemoveItemFromArrayByKey
+};

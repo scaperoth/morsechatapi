@@ -5,6 +5,11 @@ module.exports = ({ delimitter }) => {
 	const morseMap = require('../utilities/morseMap');
 	const morseKeys = Object.keys(morseMap);
 
+	/**
+	 * converts given string to morse code
+	 * @param  {String} input string to convert
+	 * @return {String}       morse code string
+	 */
 	const convertToMorseFromString = (input) => {
 		const translation = [];
 		const inputChars = input.toLowerCase().split('');
@@ -21,6 +26,11 @@ module.exports = ({ delimitter }) => {
 		return result;
 	};
 
+	/**
+	 * converts given morse code string to readable result
+	 * @param  {String} input input in morse code to decrypt
+	 * @return {String}       plain text string
+	 */
 	const convertToStringFromMorse = (input) => {
 		const translation = [];
 		const morseValues = input.split(' ');
