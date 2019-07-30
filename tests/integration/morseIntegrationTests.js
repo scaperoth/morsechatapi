@@ -14,8 +14,8 @@ describe("Integration Tests for Morse Routes", () => {
 				.get('/morse/decrypt?message=.-')
 				.end((err, res) => {
 					res.should.have.status(200);
-					res.body.should.be.a('Object');
-					res.body.data.should.be.equal('a')
+					res.body.should.be.a('String');
+					res.body.should.be.equal('a')
 					done();
 				});
 		});
@@ -25,8 +25,30 @@ describe("Integration Tests for Morse Routes", () => {
 				.get('/morse/decrypt?message=- . ... - | ... - .-. .. -. --.')
 				.end((err, res) => {
 					res.should.have.status(200);
-					res.body.should.be.a('Object');
-					res.body.data.should.be.equal('test string')
+					res.body.should.be.a('String');
+					res.body.should.be.equal('test string')
+					done();
+				});
+		});
+
+		it("should encrypt character to morse", (done) => {
+			chai.request(app)
+				.get('/morse/encrypt?message=a')
+				.end((err, res) => {
+					res.should.have.status(200);
+					res.body.should.be.a('String');
+					res.body.should.be.equal('.-')
+					done();
+				});
+		});
+
+		it("should encrypt complicated string to morse code", (done) => {
+			chai.request(app)
+				.get('/morse/encrypt?message=test string')
+				.end((err, res) => {
+					res.should.have.status(200);
+					res.body.should.be.a('String');
+					res.body.should.be.equal('- . ... - | ... - .-. .. -. --.')
 					done();
 				});
 		});
