@@ -59,7 +59,7 @@ after a user connects, this is emitted with new user information
 when socket `disconnect` is called by socket.io, this message is emitted to the clients still connected
 
 ## TODO
-- write unit tests for services
-- write integration tests for socket functions and returns
+- ~~write unit tests for services~~
+- ~~write integration tests for socket functions and returns~~
 - handle decryption of morse code through route rather than through sockets
 - add Cluster so all cores are being used for chat
