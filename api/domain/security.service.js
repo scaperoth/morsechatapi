@@ -3,6 +3,7 @@
 module.exports = ({ userLimit = 10 }) => {
 
 	const { RemoveItemFromArrayByKey } = require('../utilities/arrayUtilities');
+	const { usernameValidator } = require('../utilities/validator');
 	let currentUsers = [];
 
 	/**
@@ -14,11 +15,11 @@ module.exports = ({ userLimit = 10 }) => {
 	 */
 	const validateToken = (username, token) => {
 
-		if(!username){
+		if (!username) {
 			throw new Error('No username given');
 		}
 
-		if(!token){
+		if (!token) {
 			throw new Error('No token given');
 		}
 
@@ -41,11 +42,11 @@ module.exports = ({ userLimit = 10 }) => {
 	 */
 	const updateToken = (username, token) => {
 
-		if(!username){
+		if (!username) {
 			throw new Error('No username given');
 		}
 
-		if(!token){
+		if (!token) {
 			throw new Error('No token given');
 		}
 
@@ -78,12 +79,13 @@ module.exports = ({ userLimit = 10 }) => {
 	 */
 	const signIn = (username, socket) => {
 
-		if(!username){
-			throw new Error('No username given');
+		if (!socket) {
+			throw new Error('No socket given');
 		}
 
-		if(!socket){
-			throw new Error('No socket given');
+		const { isValid, message } = usernameValidator(username);
+		if(!isValid){
+			throw new Error(message);
 		}
 
 		username = username.toLowerCase();
@@ -117,7 +119,7 @@ module.exports = ({ userLimit = 10 }) => {
 	 */
 	const signOut = (socket) => {
 
-		if(!socket){
+		if (!socket) {
 			throw new Error('No socket given');
 		}
 
