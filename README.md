@@ -14,6 +14,12 @@ This runs `node server.js`. It could be useful to run `nodemon server.js` for te
 
 Your server is now available at [http://localhost:8080](http://localhost:8080).
 
+## Testing
+
+### `yarn test`
+
+recursively runs test in integration and unit folders under /test folder
+
 ## Socket Messages
 
 ### `SEND_MESSAGE`
