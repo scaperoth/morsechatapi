@@ -11,6 +11,10 @@ module.exports = ({ delimitter }) => {
 	 * @return {String}       morse code string
 	 */
 	const convertToMorseFromString = (input) => {
+		if (!input) {
+			throw new Error('No message given to encrypt');
+		}
+
 		const translation = [];
 		const inputChars = input.toLowerCase().split('');
 
@@ -32,6 +36,10 @@ module.exports = ({ delimitter }) => {
 	 * @return {String}       plain text string
 	 */
 	const convertToStringFromMorse = (input) => {
+		if (!input) {
+			throw new Error('No message given to decrypt');
+		}
+
 		const translation = [];
 		const morseValues = input.split(' ');
 		morseValues.map(m => {

@@ -10,7 +10,13 @@ const testArray = [
 
 describe('Array utilities test suite', function () {
 	it('should fail if key not given', function () {
-		chai.expect(arrayUtilities.RemoveItemFromArrayByKey(testArray, { item: 2 })).to.throw;
+		const expected = [
+			{ item: 1 },
+			{ item: 2 },
+			{ item: 3 }
+		];
+		const response = arrayUtilities.RemoveItemFromArrayByKey(testArray, { item: 2 });
+		response.should.be.deep.equal(expected);
 	});
 
 	it('should be able to remove item', function () {

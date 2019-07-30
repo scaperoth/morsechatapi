@@ -9,7 +9,7 @@
  */
 const RemoveItemFromArrayByKey = (arr, i, key) => {
 	const idx = arr.findIndex(c => c[key] === i[key]);
-	if (idx > -1) {
+	if (idx > -1 && key !== undefined) {
 		return [
 			...arr.slice(0, idx),
 			...arr.slice(idx + 1)
