@@ -23,8 +23,7 @@ module.exports = ({ userLimit = 10 }) => {
 			throw new Error('No token given');
 		}
 
-		username = username.toLowerCase();
-		const user = currentUsers.find(u => u.username === username);
+		const user = currentUsers.find(u => u.usernameLower === username.toLowerCase());
 		if (!user) {
 			throw new Error('User does not exist');
 		}
@@ -50,10 +49,9 @@ module.exports = ({ userLimit = 10 }) => {
 			throw new Error('No token given');
 		}
 
-		username = username.toLowerCase();
 		validateToken(username, token);
 
-		const userIdx = currentUsers.findIndex(u => u.username === username);
+		const userIdx = currentUsers.findIndex(u => u.usernameLower === username.toLowerCase());
 		if (userIdx < 0) {
 			throw new Error('User does not exist');
 		}
@@ -88,18 +86,23 @@ module.exports = ({ userLimit = 10 }) => {
 			throw new Error(message);
 		}
 
-		username = username.toLowerCase();
 		if (currentUsers.length >= userLimit) {
 			throw new Error('Too many users logged in');
 		}
 
-		const userExists = currentUsers.find(u => u.username === username);
+		usernameLower = username.toLowerCase();
+		const userExists = currentUsers.find(u => u.usernameLower === usernameLower);
 		if (userExists) {
 			throw new Error('User already exists');
 		}
 
 		const token = createToken();
-		const newUserInfo = { username, token, socket };
+		const newUserInfo = {
+			username,
+			usernameLower,
+			token,
+			socket
+		};
 		currentUsers.push(newUserInfo);
 
 		const signedInUsers = getUsers();
@@ -128,7 +131,8 @@ module.exports = ({ userLimit = 10 }) => {
 			throw new Error('User not logged in');
 		}
 
-		currentUsers = RemoveItemFromArrayByKey(currentUsers, { username: user.username }, 'username')
+		// TODO: Do better with lowercase comparison here because we want to preserve username case
+		currentUsers = RemoveItemFromArrayByKey(currentUsers, { ...user }, 'usernameLower')
 
 		return {
 			username: user.username,

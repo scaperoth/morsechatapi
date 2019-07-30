@@ -60,4 +60,12 @@ describe('Security Service test suite', function () {
 		securityService.validateToken('Username', token);
 		securityService.signOut('socket');
 	});
+
+	it('should preserve case on login and logout', function () {
+		const username = 'UseRname';
+		const { username: signInName } = securityService.signIn(username, 'socket');
+		const { username: signoutName } = securityService.signOut('socket');
+		assert.equal(username, signInName);
+		assert.equal(username, signoutName);
+	});
 });
