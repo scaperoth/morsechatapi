@@ -3,9 +3,10 @@ const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io').listen(server);
 const socketRoutes = require('./api/routes/Sockets');
+const domain = require('./api/domain')();
 
-server.listen(process.env.PORT || 3000);
+server.listen(process.env.PORT || 8080);
 
-io.on('connection', function( client ) {
-    socketRoutes.init(client);
+io.on('connection', function (socket) {
+	socketRoutes({ socket, io, ...domain });
 });

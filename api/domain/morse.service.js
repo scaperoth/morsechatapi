@@ -1,12 +1,11 @@
 // api/services/morse.service.js
 
-const morseMap = require('../utilities/morseMap');
+module.exports = ({ delimitter }) => {
 
-module.exports = ({ delimitter = '|' }) => {
+	const morseMap = require('../utilities/morseMap');
+	const morseKeys = Object.keys(morseMap);
 
-	const morseKeys = Object.keys(object);
-
-	const convertToMorseFromString(input) {
+	const convertToMorseFromString = (input) => {
 		const translation = [];
 		const inputChars = input.toLowerCase().split('');
 
@@ -22,7 +21,7 @@ module.exports = ({ delimitter = '|' }) => {
 		return result;
 	};
 
-	const convertToStringFromMorse(input) {
+	const convertToStringFromMorse = (input) => {
 		const translation = [];
 		const morseValues = input.split(' ');
 		morseValues.map(m => {
@@ -42,5 +41,5 @@ module.exports = ({ delimitter = '|' }) => {
 	return {
 		convertToMorseFromString,
 		convertToStringFromMorse
-	}
-}
+	};
+};
